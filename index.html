@@ -2082,6 +2082,7 @@ p { margin: 0; }
   const BASE = 9500;
 
   let i = 0, playing = !reduce, inView = false, started = false;
+  let userMotion = false; // si el sistema pide menos movimiento, solo animamos cuando la persona pulsa Reproducir
   let elapsed = 0, dur = BASE, last = 0;
   const tls = [];
 
@@ -2220,7 +2221,7 @@ p { margin: 0; }
 
   function playScene(idx) {
     dur = BASE;
-    if (!G || reduce) return;
+    if (!G || (reduce && !userMotion)) return;
     try {
       if (!tls[idx]) {
         const tl = G.timeline({ paused: true });
@@ -2271,6 +2272,7 @@ p { margin: 0; }
   playBtn.addEventListener('click', () => {
     const p = !playing;
     setPlaying(p);
+    if (p && reduce && !userMotion) { userMotion = true; started = true; elapsed = 0; playScene(i); return; }
     if (p && elapsed >= dur) go(i + 1, false);
   });
 
