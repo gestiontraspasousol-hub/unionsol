@@ -502,6 +502,39 @@ p { margin: 0; }
   }
   .mbar .btn { padding: 0.85em 0.6em; font-size: 0.94rem; }
 }
+
+/* Fotos: oficina y equipo */
+.photo-band { padding-block: clamp(24px, 4vw, 48px) clamp(56px, 8vw, 96px); overflow: clip; }
+.pb-card { position: relative; height: clamp(440px, 64vh, 640px); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); background: var(--cream-2); }
+.pb-media { position: absolute; left: 0; right: 0; top: -12%; bottom: -12%; will-change: transform; }
+.pb-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+.pb-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(1, 21, 30, .38) 0%, rgba(1, 21, 30, .08) 45%, rgba(1, 21, 30, 0) 70%); pointer-events: none; }
+.pb-panel { position: absolute; z-index: 1; left: clamp(16px, 3vw, 36px); bottom: clamp(16px, 3vw, 36px); width: min(470px, calc(100% - 32px)); background: rgba(255, 252, 245, .96); backdrop-filter: blur(6px); border-radius: 18px; padding: clamp(20px, 2.6vw, 30px); display: grid; gap: 14px; box-shadow: var(--shadow); will-change: transform; }
+.pb-panel h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+.pb-panel p { color: var(--text); }
+.pb-people { display: flex; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--muted); }
+.pb-people .avatars { display: flex; flex: none; }
+.pb-people .avatars img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFCF5; }
+.pb-people .avatars img + img { margin-left: -12px; }
+@media (max-width: 760px) {
+  .pb-card { height: auto; display: grid; }
+  .pb-media { position: relative; top: 0; bottom: 0; height: 280px; }
+  .pb-card::after { display: none; }
+  .pb-panel { position: relative; left: 0; bottom: 0; width: 100%; border-radius: 0; box-shadow: none; }
+}
+
+.team { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(16px, 2.4vw, 28px); align-items: end; margin-top: clamp(40px, 6vw, 72px); }
+.tm { margin: 0; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 5; max-width: 100%; box-shadow: var(--shadow-sm); background: var(--cream); will-change: transform; }
+.tm img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.tm figcaption { position: absolute; left: 12px; bottom: 12px; font: 500 0.66rem/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: rgba(255, 252, 245, .92); padding: 7px 10px; border-radius: 999px; }
+.team-note { display: grid; gap: 14px; align-content: end; padding-bottom: 8px; }
+.team-note b { font: 600 clamp(1.5rem, 2.6vw, 2.1rem)/1.08 var(--f-display); color: var(--ink); letter-spacing: -0.02em; }
+.team-note span { color: var(--muted); }
+.team-note .btn { justify-self: start; }
+@media (max-width: 860px) {
+  .team { grid-template-columns: 1fr 1fr; }
+  .team-note { grid-column: 1 / -1; }
+}
 /* PX-CSS-START */
 /* ===== Portada con la animación del proceso (prefijo cover- y px-) ===== */
 .cover {
@@ -519,7 +552,13 @@ p { margin: 0; }
 .cover-top { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
 .cover-top .brand { margin-right: 0; }
 .cover-top-r { display: flex; align-items: center; gap: 18px; }
-.cover-tel { font: 600 0.95rem var(--f-body); color: var(--ink); text-decoration: none; font-variant-numeric: tabular-nums; }
+.cover-people { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.cover-people .avatars { display: flex; }
+.cover-people .avatars img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg); box-shadow: 0 4px 12px -6px rgba(1, 21, 30, .45); }
+.cover-people .avatars img + img { margin-left: -12px; }
+.cover-people .cp-text { display: grid; gap: 3px; line-height: 1.1; }
+.cover-people small { font: 500 0.62rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.cover-people b { font: 700 0.98rem/1 var(--f-body); font-variant-numeric: tabular-nums; }
 .cover-cta { padding: 0.72em 1.15em; font-size: 0.9rem; white-space: nowrap; }
 .cover-grid { position: relative; z-index: 1; width: 100%; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 4vw, 64px); align-items: center; will-change: transform; }
 .cover-copy { display: grid; gap: 18px; align-content: center; }
@@ -628,7 +667,8 @@ p { margin: 0; }
 }
 @media (max-width: 640px) {
   .cover { gap: 18px; }
-  .cover-tel { display: none; }
+  .cover-people .cp-text { display: none; }
+  .cover-people .avatars img { width: 34px; height: 34px; }
   .cover-cta { padding: 0.6em 0.9em; font-size: 0.8rem; }
   .cover-top .brand-text span { display: none; }
   .px-steps { padding: 14px 10px 12px; }
@@ -652,7 +692,10 @@ p { margin: 0; }
         <span class="brand-text"><img class="wm" src="wordmark.webp" alt="UnionSol" width="868" height="180"><span>Soluciones Empresariales</span></span>
       </a>
       <div class="cover-top-r">
-        <a class="cover-tel" href="tel:+34695296250">695 296 250</a>
+        <a class="cover-people" href="tel:+34695296250" aria-label="Llamar a UnionSol: 695 296 250">
+          <span class="avatars" aria-hidden="true"><img src="equipo-1-96.webp" alt="" width="96" height="96"><img src="equipo-2-96.webp" alt="" width="96" height="96"></span>
+          <span class="cp-text"><small>Te atiende una persona</small><b>695 296 250</b></span>
+        </a>
         <a class="btn btn-sol cover-cta" href="#captacion">Ofrecer mi negocio</a>
       </div>
     </div>
@@ -1132,6 +1175,20 @@ p { margin: 0; }
     </div>
   </section>
 
+  <section class="photo-band" aria-labelledby="oficina-title">
+    <div class="wrap">
+      <div class="pb-card">
+        <div class="pb-media"><img src="oficina-sala.webp" alt="Sala de reuniones de la oficina de UnionSol en Madrid, con una gran mesa redonda de madera" width="1200" height="1200" loading="lazy"></div>
+        <div class="pb-panel">
+          <span class="eyebrow"><span class="ring-ico"></span>Nuestra oficina en Madrid</span>
+          <h2 id="oficina-title">Cara a cara, de la primera visita a la firma</h2>
+          <p>Para nosotros es muy importante conocerte en persona. En nuestra oficina repasamos contigo las cuentas del local, preparamos las visitas y revisamos cada oferta antes de presentarla.</p>
+          <div class="pb-people"><span class="avatars" aria-hidden="true"><img src="equipo-1-96.webp" alt="" width="96" height="96"><img src="equipo-2-96.webp" alt="" width="96" height="96"></span><span>Nueve profesionales entre plantilla y colaboradores</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section process" id="proceso">
     <div class="wrap process-grid">
       <div class="sun-sticky">
@@ -1397,6 +1454,15 @@ p { margin: 0; }
           <li><span class="ring-ico"></span><b>Criterio técnico</b><span class="t">Revisamos licencias, alturas, accesos y terrazas antes de publicar, porque es lo primero que pregunta quien compra.</span></li>
           <li><span class="ring-ico"></span><b>Cierre</b><span class="t">Negociamos renta, fianza, carencia y años de contrato con la propiedad, y acompañamos hasta la firma.</span></li>
         </ul>
+      </div>
+      <div class="team">
+        <figure class="tm"><img src="equipo-1.webp" alt="Miembro del equipo de UnionSol en la oficina de Madrid" width="560" height="560" loading="lazy"><figcaption>Equipo UnionSol</figcaption></figure>
+        <figure class="tm"><img src="equipo-2.webp" alt="Miembro del equipo de UnionSol en su puesto de trabajo" width="560" height="560" loading="lazy"><figcaption>Equipo UnionSol</figcaption></figure>
+        <div class="team-note">
+          <b>Te atiende una persona del equipo, no un formulario</b>
+          <span>Cinco profesionales en plantilla y cuatro colaboradores. Te llamamos, vamos a ver el local contigo y te acompañamos durante toda la operación.</span>
+          <a class="btn btn-sol" href="#contacto">Hablar con nosotros</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1974,6 +2040,15 @@ p { margin: 0; }
       if (i % 3 !== 1) return;
       gsap.fromTo(c, { y: 80 }, { y: -80, ease: 'none', scrollTrigger: { trigger: '#listings', start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
     });
+  });
+
+  // Oficina y equipo: la foto se desplaza más despacio que la página
+  if (document.querySelector('.photo-band')) mm.add('(min-width: 761px)', () => {
+    gsap.fromTo('.pb-media', { yPercent: -9 }, { yPercent: 9, ease: 'none', scrollTrigger: { trigger: '.photo-band', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.fromTo('.pb-panel', { y: 70 }, { y: -20, ease: 'none', scrollTrigger: { trigger: '.photo-band', start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+  });
+  mm.add('(min-width: 861px)', () => {
+    gsap.utils.toArray('.team .tm').forEach((el, k) => gsap.fromTo(el, { y: k ? 130 : 60 }, { y: k ? -10 : -30, ease: 'none', scrollTrigger: { trigger: '.team', start: 'top bottom', end: 'bottom top', scrub: 0.6 } }));
   });
 
   // Frase de marca: las palabras convergen desde los lados
